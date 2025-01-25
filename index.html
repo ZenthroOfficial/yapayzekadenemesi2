@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Bot</title>
+</head>
+<body>
+    <h1>ChatGPT Bot</h1>
+    <textarea id="input" placeholder="Sorunuzu yazın..."></textarea>
+    <button onclick="sendMessage()">Gönder</button>
+    <div id="response"></div>
+    <script>
+        const apiKey = "YOUR_API_KEY"; // OpenAI API anahtarını buraya koy!
+        async function sendMessage() {
+            const input = document.getElementById("input").value;
+            const res = await fetch("https://api.openai.com/v1/completions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: "text-davinci-003",
+                    prompt: input,
+                    max_tokens: 100
+                })
+            });
+            const data = await res.json();
+            document.getElementById("response").innerText = data.choices[0].text;
+        }
+    </script>
+</body>
+</html>
