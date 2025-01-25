@@ -1,0 +1,2 @@
+# yapayzekadenemesi2
+deneme
